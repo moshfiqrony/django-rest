@@ -1,9 +1,11 @@
 from rest_framework import serializers
-from ..models import Users
+from ..models import UserProfile
 
 
-class UserSerializers(serializers.ModelSerializer):
+class UserProfileSerializers(serializers.ModelSerializer):
     class Meta:
-        model = Users
-        fields = ('id', 'title', 'body', 'created')
+        model = UserProfile
+        fields = ('id', 'user_id', 'email', 'is_active', 'is_admin', 'is_manager', 'is_org_admin', 'is_stuff')
 
+    def create(self, validated_data):
+        return UserProfile.objects.create(**validated_data)
