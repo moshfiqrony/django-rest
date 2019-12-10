@@ -12,7 +12,7 @@ from rest_framework.status import (
 )
 
 from .serializers import UserProfileSerializers
-from ..models import UserProfile
+from users.models import UserProfile
 
 
 @csrf_exempt
