@@ -1,11 +1,11 @@
-from django.conf.urls import url, include
-from rest_framework import routers
-from .views import login, logoutUser
+from .views import login, logoutUser, signin, userProfile, chnagePassword
 from django.urls import path
 
 
 urlpatterns = [
     path('login/', login),
-    # path('get_data/', getData),
     path('logout/', logoutUser),
+    path('signin/', signin),
+    path('profile/', userProfile),
+    path('changePassword/', chnagePassword),
 ]
