@@ -10,6 +10,7 @@ git clone https://github.com/moshfiqrony/django-rest.git
 # How to use?
 To use it you need [PyChamr](https://www.jetbrains.com/pycharm/download/#section=linux) , [Visual Studio Code](https://code.visualstudio.com/)
 ```
+terminal
 cd django-res
 virtualenv venv
 source venv/bin/activate
