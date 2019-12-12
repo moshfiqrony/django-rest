@@ -8,3 +8,9 @@ class StudentProfileSerializers(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return StudentProfile.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.firstname = validated_data.get('firstname', instance.firstname)
+        instance.lastname = validated_data.get('lastname', instance.lastname)
+        instance.save()
+        return instance
