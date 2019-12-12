@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import authentication, permissions
 from rest_framework.decorators import api_view, permission_classes
@@ -8,15 +9,21 @@ from rest_framework.status import (
     HTTP_403_FORBIDDEN,
     HTTP_404_NOT_FOUND
 )
-from django.shortcuts import get_object_or_404
-from .serializers import StudentProfileSerializers
 from rest_framework.views import APIView
+
+from .serializers import StudentProfileSerializers
 from ..models import StudentProfile
 
 
 class Students(APIView):
     authentication_classes = [authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        student = get_object_or_404(StudentProfile.objects.all(), user_id=request.user.id)
+        serializer = StudentProfileSerializers(student)
+        return Response(serializer.data)
+
     def post(self, request):
         student = {
             'user_id': request.user.id,
@@ -31,15 +38,16 @@ class Students(APIView):
             return Response(studentSerializer.errors, HTTP_403_FORBIDDEN)
 
     def put(self, request):
-        saved_student = get_object_or_404( StudentProfile.objects.all(), user_id=request.user.id)
+        saved_student = get_object_or_404(StudentProfile.objects.all(), user_id=request.user.id)
         data = {
             'firstname': request.data.get('firstname'),
             'lastname': request.data.get('lastname'),
         }
         serializer = StudentProfileSerializers(instance=saved_student, data=data, partial=True)
         if serializer.is_valid():
-            saved_student  = serializer.save()
-            return Response({"success": "Student '{}' updated successfully".format(saved_student.personal_email)}, HTTP_200_OK)
+            saved_student = serializer.save()
+            return Response({"success": "Student '{}' updated successfully".format(saved_student.personal_email)},
+                            HTTP_200_OK)
         else:
             return Response(0, HTTP_404_NOT_FOUND)
 
