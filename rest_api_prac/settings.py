@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users',
     'iubat',
     'corsheaders',
+    'test1',
 ]
 
 MIDDLEWARE = [
