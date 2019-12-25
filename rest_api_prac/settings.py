@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'iubat',
     'corsheaders',
     'test1',
+    'one_endpoint_practice'
 ]
 
 MIDDLEWARE = [

@@ -3,3 +3,4 @@ venv
 *_initial.py
 *_auto_*_*.py
 __pycache__
+.vscode

@@ -23,4 +23,5 @@ urlpatterns = [
     path('api/user/', include('users.api.urls')),
     path('api/iubat/', include('iubat.api.urls')),
     path('api/test1/', include('test1.urls')),
+    path('api/channel/', include('one_endpoint_practice.urls')),
 ]
